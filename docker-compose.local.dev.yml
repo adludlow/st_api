@@ -1,0 +1,27 @@
+version: '3'
+services:
+  api:
+    image: node:8-alpine
+    command: npm start
+    working_dir: /api
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/api
+      - node:/home/node
+    depends_on:
+      - postgres
+    env_file:
+      - ./dbvars.env
+  postgres:
+    image: postgres:11-alpine
+    ports: 
+      - 5432:5432
+    volumes:
+      - postgres:/var/lib/postgres/data
+    env_file:
+      - ./dbvars.env
+
+volumes:
+  postgres:
+  node:

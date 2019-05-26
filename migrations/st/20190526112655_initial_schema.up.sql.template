@@ -1,0 +1,31 @@
+create role ${DB_ST_CONNECT_USER} with password '${DB_ST_CONNECT_USER_PASS}' login;
+alter role ${DB_ST_CONNECT_USER} set search path to ${DB_ST_SCHEMA}, public;
+grant usage on schema ${DB_ST_SCHEMA} to ${DB_ST_CONNECT_USER};
+
+create table player (
+  id serial primary key,
+  native_id integer,
+  first_name text,
+  last_name text,
+  attributes jsonb,
+  created_on timestamptz not null default current_timestamp
+);
+grant select, insert, update, delete on table player to ${DB_ST_CONNECT_USER};
+
+create table sc_team (
+  id serial primary key,
+  name text,
+  coach text,
+  created_on timestamptz not null default current_timestamp
+);
+grant select, insert, update, delete on table sc_team to ${DB_ST_CONNECT_USER};
+
+create table sc_team_player_map (
+  id serial primary key,
+  player_id integer references player(id),
+  sc_team_id integer references sc_team(id),
+  active boolean default TRUE,
+  created_on timestamptz not null default current_timestamp,
+  updated_on timestamptz
+);
+

@@ -1,0 +1,19 @@
+{
+  "name": "st_api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@feathersjs/feathers": "^3.3.1",
+    "config": "^3.1.0",
+    "envsub": "^3.0.9",
+    "knex": "^0.16.5",
+    "pg": "^7.11.0"
+  }
+}
