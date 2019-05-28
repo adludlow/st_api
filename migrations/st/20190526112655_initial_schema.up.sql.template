@@ -1,5 +1,9 @@
+create role ${DB_ST_USER} with password '${DB_ST_USER_PASS}' login;
+create schema authorization ${DB_ST_USER};
+alter role ${DB_ST_USER} set search_path to ${DB_ST_SCHEMA}, public;
+
 create role ${DB_ST_CONNECT_USER} with password '${DB_ST_CONNECT_USER_PASS}' login;
-alter role ${DB_ST_CONNECT_USER} set search path to ${DB_ST_SCHEMA}, public;
+alter role ${DB_ST_CONNECT_USER} set search_path to ${DB_ST_SCHEMA}, public;
 grant usage on schema ${DB_ST_SCHEMA} to ${DB_ST_CONNECT_USER};
 
 create table player (

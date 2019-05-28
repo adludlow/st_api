@@ -1,5 +1,5 @@
 {
   "knex_st": {
-    "connection": "DB_ST_CONNECT_KNEX"
+    "connection": "DB_ST_CONNECT"
   }
 }

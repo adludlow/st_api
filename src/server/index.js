@@ -6,4 +6,4 @@ app
   .on('listening', () => {
     logger.info(`Application started on port ${port}`)
   })
-  .listen(port)
+  .listen(port, '0.0.0.0')
