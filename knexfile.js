@@ -5,5 +5,12 @@ module.exports = {
     migrations: {
       directory: './migrations/st'
     }
+  },
+  dev_postgres: {
+    client: 'pg',
+    connection: process.env.DB_ADMIN_MIGRATE,
+    migrations: {
+      directory: './migrations/postgres'
+    }
   }
 }

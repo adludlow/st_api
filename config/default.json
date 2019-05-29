@@ -2,6 +2,9 @@
   "knex_st": {
     "client": "pg"
   },
+  "knex_postgres": {
+    "client": "pg"
+  },
   "port": 3000,
   "sc_url": "https://supercoach.heraldsun.com.au"
 }

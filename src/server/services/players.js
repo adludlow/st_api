@@ -1,4 +1,5 @@
 import { GeneralError } from '@feathersjs/errors'
+import { omitUndefined } from './_common'
 
 const endpoint = 'players'
 const table = 'player'
@@ -10,10 +11,32 @@ export const players = () => (app) => {
   app.use(endpoint, {
 
     async create (data) {
+      const players = Array.isArray(data) ? data : [ data ]
+      let result = []
       try {
-        const { id, first_name, last_name } = data
+        await knex.transaction(async txn => {
+          for (const p of players) {
+            const { id, first_name, last_name } = p
 
-        return await knex(table).insert({ id, first_name, last_name, attributes: data }, tableColumns)
+            const player = await txn(table)
+              .insert({ native_id: id, first_name, last_name, attributes: p}, tableColumns)
+              .returning([ 'id', 'created_on', ...tableColumns ])
+            result.push(player)
+          }
+        })
+        return result
+      } catch (error) {
+        throw new GeneralError(error)
+      }
+    },
+
+    async find ({ query = {} }) {
+      const q = knex(table)
+        .select(tableColumns)
+        .where(omitUndefined(query))
+
+      try {
+        return await q
       } catch (error) {
         throw new GeneralError(error)
       }

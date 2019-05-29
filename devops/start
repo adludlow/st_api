@@ -12,6 +12,7 @@ fi
 
 # Run initial setup
 docker-compose run --rm api node lib/knex/sqlSecretsPrepare.js
+docker-compose run --rm api npx knex migrate:latest --env dev_postgres
 docker-compose run --rm api npx knex migrate:latest --env dev_st
 
 docker-compose up -d

@@ -1,7 +1,3 @@
-create role ${DB_ST_USER} with password '${DB_ST_USER_PASS}' login;
-create schema authorization ${DB_ST_USER};
-alter role ${DB_ST_USER} set search_path to ${DB_ST_SCHEMA}, public;
-
 create role ${DB_ST_CONNECT_USER} with password '${DB_ST_CONNECT_USER_PASS}' login;
 alter role ${DB_ST_CONNECT_USER} set search_path to ${DB_ST_SCHEMA}, public;
 grant usage on schema ${DB_ST_SCHEMA} to ${DB_ST_CONNECT_USER};
@@ -14,6 +10,7 @@ create table player (
   attributes jsonb,
   created_on timestamptz not null default current_timestamp
 );
+create unique index player_native_id_idx on player (native_id);
 grant select, insert, update, delete on table player to ${DB_ST_CONNECT_USER};
 
 create table sc_team (
@@ -22,6 +19,7 @@ create table sc_team (
   coach text,
   created_on timestamptz not null default current_timestamp
 );
+create unique index sc_team_name_idx on sc_team (name);
 grant select, insert, update, delete on table sc_team to ${DB_ST_CONNECT_USER};
 
 create table sc_team_player_map (
@@ -33,3 +31,4 @@ create table sc_team_player_map (
   updated_on timestamptz
 );
 
+grant usage, select on all sequences in schema ${DB_ST_SCHEMA} to ${DB_ST_CONNECT_USER};

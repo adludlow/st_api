@@ -2,9 +2,10 @@ import { GeneralError } from '@feathersjs/errors'
 import rp from 'request-promise'
 import config from 'config'
 
-const endpoint = 'sync'
+const endpoint = 'sync/players'
 
-export const sync = () => (app) => {
+export const syncplayers = () => (app) => {
+  const playersSvc = app.service('players')
   app.use(endpoint, {
     
     async create (data) {
@@ -17,19 +18,17 @@ export const sync = () => (app) => {
           json: true
         }
         const players = await rp(playersReq)
+        
+        const result = await playersSvc.create(players) 
 
-        for (const p of player) {
-          
-        }
-
-        return players
+        return result
 
         // Update sync job entry
       } catch (error) {
         console.log(error)
         throw new GeneralError("Player retrieval failed")
       }
-    }
+    },
 
   })
 }

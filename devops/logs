@@ -1,0 +1,9 @@
+#!/bin/sh
+
+env=${1:-dev}
+
+export UID
+export GID=`id -g`
+export COMPOSE_FILE=docker-compose.local.$env.yml
+
+docker-compose logs -f
