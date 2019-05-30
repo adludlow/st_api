@@ -32,7 +32,7 @@ export const players = () => (app) => {
 
     async find ({ query = {} }) {
       const q = knex(table)
-        .select(tableColumns)
+        .select([ 'id', 'created_on', ...tableColumns ])
         .where(omitUndefined(query))
 
       try {

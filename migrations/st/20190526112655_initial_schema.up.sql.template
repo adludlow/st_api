@@ -30,5 +30,6 @@ create table sc_team_player_map (
   created_on timestamptz not null default current_timestamp,
   updated_on timestamptz
 );
+grant select, insert, update, delete on table sc_team_player_map to ${DB_ST_CONNECT_USER};
 
 grant usage, select on all sequences in schema ${DB_ST_SCHEMA} to ${DB_ST_CONNECT_USER};
