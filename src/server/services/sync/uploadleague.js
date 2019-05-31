@@ -51,7 +51,6 @@ export const uploadleague = () => (app) => {
                 last_name: r.last_name
               }
               const [ player ] = await playersSvc.find({ query })
-              console.log(player)
               if (!player)
                 console.log(r.first_name, r.last_name)
               else if (r.team) {

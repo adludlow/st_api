@@ -1,0 +1,8 @@
+create or replace view v_player as
+select p.id, p.native_id, p.first_name, p.last_name, p.attributes, p.created_on, t.name as sc_team_name
+from player p
+left join sc_team_player_map m on m.player_id = p.id
+left join sc_team t on t.id = m.sc_team_id;
+
+
+grant select on v_player to ${DB_ST_CONNECT_USER};
