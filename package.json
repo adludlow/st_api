@@ -14,7 +14,7 @@
     "@feathersjs/express": "^1.3.1",
     "@feathersjs/feathers": "^3.3.1",
     "body-parser": "^1.19.0",
-    "config": "^3.1.0",
+    "config": "^3.3.8",
     "csv-parse": "^4.4.1",
     "envsub": "^3.0.9",
     "knex": "^0.16.5",
